@@ -1,10 +1,6 @@
 <template>
-  <h1> Hello, Vuejs with Laravel </h1>
+    <h1>Hello, Vuejs with Laravel</h1>
 </template>
-<script>
-export default {
-  setup() {
-
-   }
-}
+<script setup lang="ts">
+const temp = "";
 </script>

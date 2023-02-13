@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+use NunoMaduro\PhpInsights\Domain\Metrics\Style\Style;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenDefineFunctions;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenFinalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenNormalClasses;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenPrivateMethods;
 use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff;
+use PHP_CodeSniffer\Standards\Generic\Sniffs\Formatting\SpaceAfterNotSniff;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeClosingBraceSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
@@ -15,6 +19,12 @@ use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff;
+use PhpCsFixer\Fixer\ArrayNotation\NoMultilineWhitespaceAroundDoubleArrowFixer;
+use PhpCsFixer\Fixer\Basic\BracesFixer;
+use PhpCsFixer\Fixer\StringNotation\SingleQuoteFixer;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowEmptySniff;
+use SlevomatCodingStandard\Sniffs\ControlStructures\DisallowShortTernaryOperatorSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 
 return [
     /*
@@ -82,12 +92,30 @@ return [
         PropertyTypeHintSniff::class,
         ReturnTypeHintSniff::class,
         UselessFunctionDocCommentSniff::class,
+        NoMultilineWhitespaceAroundDoubleArrowFixer::class,
+        LineLengthSniff::class,
+        SpaceAfterNotSniff::class,
+        SingleQuoteFixer::class,
+        ScopeClosingBraceSniff::class,
+        BracesFixer::class,
     ],
 
     "config" => [
         ForbiddenPrivateMethods::class => [
             "title" =>
                 "The usage of private methods is not idiomatic in Laravel.",
+        ],
+        DisallowEmptySniff::class => [
+            "exclude" => ["app/Http/Middleware/RedirectIfAuthenticated.php"],
+        ],
+        DisallowShortTernaryOperatorSniff::class => [
+            "exclude" => ["app/Providers/RouteServiceProvider.php"],
+        ],
+        UnusedParameterSniff::class => [
+            "exclude" => [
+                "app/Console/Kernel.php",
+                "app/Exceptions/Handler.php",
+            ],
         ],
     ],
 
@@ -103,11 +131,11 @@ return [
     */
 
     "requirements" => [
-        //        'min-quality' => 0,
-        //        'min-complexity' => 0,
-        //        'min-architecture' => 0,
-        //        'min-style' => 0,
-        //        'disable-security-check' => false,
+        "min-quality" => 80,
+        "min-complexity" => 80,
+        "min-architecture" => 80,
+        "min-style" => 0,
+        // 'disable-security-check' => false,
     ],
 
     /*

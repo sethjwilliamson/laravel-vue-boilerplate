@@ -4,8 +4,11 @@
         "dev": "vite",
         "build": "vite build",
         "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix resources",
-        "format": "prettier .  --write",
-        "prepare": "husky install"
+        "lint:check": "eslint --ext .js,.ts,.vue --ignore-path .gitignore resources",
+        "format": "prettier . --write --loglevel warn",
+        "format:check": "prettier . --check",
+        "prepare": "husky install",
+        "f": "yarn lint && yarn format && php artisan insights"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.19.3",
@@ -29,7 +32,7 @@
         "vue-loader": "^17.0.1"
     },
     "lint-staged": {
-        "*.{js,ts,vue}": "eslint --cache --fix",
-        "*.--write": "prettier --write"
+        "*.{js,ts,vue}": "eslint --cache",
+        "*": "prettier --list-different"
     }
 }

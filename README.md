@@ -1,3 +1,7 @@
+<h1 align="center">Laravel + Vue Boilerplate</h1>
+<p align="center">Using Typescript, formatting, linting, and insights</p>
+<p align="center">This repo uses husky to check formatting, linting, and the PHP insights before each commit. Along with this, it is set up to check all tests before each push.</p>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

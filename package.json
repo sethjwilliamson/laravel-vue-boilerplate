@@ -8,7 +8,7 @@
         "format": "prettier . --write --loglevel warn",
         "format:check": "prettier . --check",
         "prepare": "husky install",
-        "f": "yarn lint && yarn format && php artisan insights"
+        "f": "yarn lint && yarn format"
     },
     "devDependencies": {
         "@prettier/plugin-php": "^0.19.3",
